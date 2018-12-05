@@ -1,0 +1,75 @@
+FOOTBALL.java
+package sample;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+//import java.lang.*;
+
+public class Football extends JFrame {
+    JPanel[] mWin = new JPanel[9];
+    JPanel[] m = new JPanel[3];
+    JButton ac = new JButton("FC BARCELONA");
+    JButton mad = new JButton("FC CHELSEA");
+    int barce = 0;
+    int chel = 0;
+    String result = "Result: " + barce + "x" + chel;
+    JLabel res = new JLabel(result);
+    String scorer = "Last Scorer:" + "N/A";
+    JLabel scor = new JLabel(scorer);
+    String winner = "Winner:" +"DRAW";
+    Label win = new Label(winner);
+    public Football(){
+        setLayout (new GridLayout(3, 3));
+        setBackground(new Color(175, 238, 238));
+        for (int i = 0; i<mWin.length; i++){
+            mWin[i] = new JPanel();
+            add(mWin[i]);
+        }
+        mWin[1].add(win);
+        mWin[4].add(res);
+        mWin[3].add(ac);
+        mWin[5].add(mad);
+        mWin[7].add(scor);
+
+        ac.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent a) {
+                barce++;
+                scor.setText("Last Scorer:" + " FC BARCELONA");
+                res.setText("Result: " + barce + "x" + chel);
+                if (barce > chel) {
+                    win.setText("Winner:" + "FC BARCELONA");
+                } else if (barce < chel) {
+                    win.setText("Winner:" + "FC CHELSEA");
+                } else win.setText("Winner:" + "DRAW");
+            }
+        } );
+
+        mad.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent a){
+                chel++;
+                scor.setText("Last Scorer:"+" FC CHELSEA");
+                res.setText("Result: " + barce + "x" + chel);
+                if (barce>chel){
+                    win.setText("Winner:" + "FC BARCELONA");
+                }
+                else if (barce<chel){
+                    win.setText("Winner:"+"FC CHELSEA");
+                }
+                else win.setText("Winner:"+"DRAW");
+            }
+        });
+        setSize(800,500);
+        setVisible(true);
+    }
+}
+MAIN.java
+package sample;
+
+class Main {
+    public static void main(String[] args) {
+        new Football();
+    }
+}
